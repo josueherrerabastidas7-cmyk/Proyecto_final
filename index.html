@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Seguimiento de 16 Semanas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Plan de 16 Semanas</h1>
+        <p>Aquí se registra el progreso y se acceden a los documentos de cada semana.</p>
+    </header>
+
+    <main>
+        <section class="uploader-card">
+            <h2>Gestionar archivos</h2>
+            <p>Sube archivos que quieras asociar a una semana. Se almacenan en tu navegador (localStorage) y se agrupan por semana.</p>
+            <input id="fileInput" type="file" multiple />
+            <button id="uploadBtn">Subir archivos</button>
+            <div id="messages" aria-live="polite"></div>
+            <hr />
+            <label for="weekSelect">Ver archivos de la semana:</label>
+            <select id="weekSelect"><option value="all">Todas</option></select>
+        </section>
+
+        <section id="filesView" class="files-view">
+            <!-- Aquí se renderizan los archivos agrupados por semana -->
+        </section>
+
+        <section id="semana1" class="semana-card">
+            <h2>Semana 1</h2>
+            <p>Descripción o resumen de los objetivos para esta semana.</p>
+            <a href="https://drive.google.com/drive/folders/1wo8uBkJ8BJ7oZ3oBjjYdmjnkG4lEx6pD?usp=drive_link" target="_blank" class="drive-link">📂 Ver Documento en Drive</a>
+        </section>
+
+        <section id="semana2" class="semana-card">
+            <h2>Semana 2</h2>
+            <p>Descripción o resumen de los objetivos para esta semana.</p>
+            <a href="https://drive.google.com/drive/folders/1Ht7BdH84Wlq9MgJbaaOX0zcBDx-gnWv6?usp=drive_link" target="_blank" class="drive-link">📂 Ver Documento en Drive</a>
+        </section>
+        <section id="semana3" class="semana-card">
+            <h2>Semana 3</h2>
+            <p>Descripción o resumen de los objetivos para esta semana.</p>
+            <a href="https://drive.google.com/drive/folders/1Ht7BdH84Wlq9MgJbaaOX0zcBDx-gnWv6?usp=drive_link" target="_blank" class="drive-link">📂 Ver Documento en Drive</a>
+        </section>
+        <section id="semana4" class="semana-card">
+            <h2>Semana 4</h2>
+            <p>Descripción o resumen de los objetivos para esta semana.</p>
+            <a href="https://drive.google.com/drive/folders/1Ht7BdH84Wlq9MgJbaaOX0zcBDx-gnWv6?usp=drive_link" target="_blank" class="drive-link">📂 Ver Documento en Drive</a>
+        </section>
+        <section id="semana5" class="semana-card">
+            <h2>Semana 5</h2>
+            <p>Descripción o resumen de los objetivos para esta semana.</p>
+            <a href="https://drive.google.com/drive/folders/1Ht7BdH84Wlq9MgJbaaOX0zcBDx-gnWv6?usp=drive_link" target="_blank" class="drive-link">📂 Ver Documento en Drive</a>
+        </section>
+        <section id="semana6" class="semana-card">
+            <h2>Semana 6</h2>
+            <p>Descripción o resumen de los objetivos para esta semana.</p>
+            <a href="https://drive.google.com/drive/folders/1Ht7BdH84Wlq9MgJbaaOX0zcBDx-gnWv6?usp=drive_link" target="_blank" class="drive-link">📂 Ver Documento en Drive</a>
+        </section>
+        <section id="semana7" class="semana-card">
+            <h2>Semana 7</h2>
+            <p>Descripción o resumen de los objetivos para esta semana.</p>
+            <a href="https://drive.google.com/drive/folders/1Ht7BdH84Wlq9MgJbaaOX0zcBDx-gnWv6?usp=drive_link" target="_blank" class="drive-link">📂 Ver Documento en Drive</a>
+        </section>
+        <section id="semana8" class="semana-card">
+            <h2>Semana 8</h2>
+            <p>Descripción o resumen de los objetivos para esta semana.</p>
+            <a href="https://drive.google.com/drive/folders/1Ht7BdH84Wlq9MgJbaaOX0zcBDx-gnWv6?usp=drive_link" target="_blank" class="drive-link">📂 Ver Documento en Drive</a>
+        </section>
+        <section id="semana9" class="semana-card">
+            <h2>Semana 9</h2>
+            <p>Descripción o resumen de los objetivos para esta semana.</p>
+            <a href="https://drive.google.com/drive/folders/1Ht7BdH84Wlq9MgJbaaOX0zcBDx-gnWv6?usp=drive_link" target="_blank" class="drive-link">📂 Ver Documento en Drive</a>
+        </section>
+        <section id="semana10" class="semana-card">
+            <h2>Semana 10</h2>
+            <p>Descripción o resumen de los objetivos para esta semana.</p>
+            <a href="https://drive.google.com/drive/folders/1Ht7BdH84Wlq9MgJbaaOX0zcBDx-gnWv6?usp=drive_link" target="_blank" class="drive-link">📂 Ver Documento en Drive</a>
+        </section>
+        <section id="semana11" class="semana-card">
+            <h2>Semana 11</h2>
+            <p>Descripción o resumen de los objetivos para esta semana.</p>
+            <a href="https://drive.google.com/drive/folders/1Ht7BdH84Wlq9MgJbaaOX0zcBDx-gnWv6?usp=drive_link" target="_blank" class="drive-link">📂 Ver Documento en Drive</a>
+        </section>
+        <section id="semana12" class="semana-card">
+            <h2>Semana 12</h2>
+            <p>Descripción o resumen de los objetivos para esta semana.</p>
+            <a href="https://drive.google.com/drive/folders/1Ht7BdH84Wlq9MgJbaaOX0zcBDx-gnWv6?usp=drive_link" target="_blank" class="drive-link">📂 Ver Documento en Drive</a>
+        </section>
+        <section id="semana13" class="semana-card">
+            <h2>Semana 13</h2>
+            <p>Descripción o resumen de los objetivos para esta semana.</p>
+            <a href="https://drive.google.com/drive/folders/1Ht7BdH84Wlq9MgJbaaOX0zcBDx-gnWv6?usp=drive_link" target="_blank" class="drive-link">📂 Ver Documento en Drive</a>
+        </section>
+        <section id="semana14" class="semana-card">
+            <h2>Semana 14</h2>
+            <p>Descripción o resumen de los objetivos para esta semana.</p>
+            <a href="https://drive.google.com/drive/folders/1Ht7BdH84Wlq9MgJbaaOX0zcBDx-gnWv6?usp=drive_link" target="_blank" class="drive-link">📂 Ver Documento en Drive</a>
+        </section>
+        <section id="semana15" class="semana-card">
+            <h2>Semana 15</h2>
+            <p>Descripción o resumen de los objetivos para esta semana.</p>
+            <a href="https://drive.google.com/drive/folders/1Ht7BdH84Wlq9MgJbaaOX0zcBDx-gnWv6?usp=drive_link" target="_blank" class="drive-link">📂 Ver Documento en Drive</a>
+        </section>
+        
+        <section id="semana16" class="semana-card">
+            <h2>Semana 16</h2>
+            <p>¡Felicidades, llegaste al final!</p>
+            <a href="https://drive.google.com/drive/folders/1Kbl1YbuXlif57pUQ05jvQg1h9LAu6oMm?usp=drive_link" target="_blank" class="drive-link">📂 Ver Documento en Drive</a>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Seguimiento de Proyectos.</p>
+    </footer>
+    <script src="scripts.js"></script>
+</body>
+</html>
