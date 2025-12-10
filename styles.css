@@ -426,3 +426,68 @@ hr {
     border-top: 1px solid var(--border);
     margin: 16px 0;
 }
+
+/* Estilos para semanas con uploader individual */
+.week-header {
+    margin-bottom: 16px;
+}
+
+.week-uploader {
+    background: linear-gradient(135deg, #ffffff 0%, #faf8ff 100%);
+    padding: 12px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    margin-bottom: 16px;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+}
+
+.week-file-input {
+    padding: 8px;
+    border: 1px dashed var(--primary-light);
+    border-radius: var(--radius-sm);
+    background: var(--light);
+    cursor: pointer;
+    font-size: 0.85rem;
+    flex: 1;
+}
+
+.week-upload-btn {
+    padding: 8px 12px;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.85rem;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(236, 72, 153, 0.2);
+}
+
+.week-upload-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+}
+
+.week-messages {
+    padding: 4px 8px;
+    background: #dbeafe;
+    color: #1e40af;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    min-height: 20px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    grid-column: 1 / -1;
+}
+
+.empty-files {
+    text-align: center;
+    color: #9ca3af;
+    padding: 16px;
+    font-size: 0.9rem;
+}

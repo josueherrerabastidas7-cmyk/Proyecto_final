@@ -9,92 +9,11 @@
 <body>
     <header>
         <h1>Plan de 16 Semanas</h1>
-        <p>Gestiona y visualiza tus archivos semanales directamente aquí.</p>
+        <p>Sube y visualiza tus archivos de cada semana directamente en su tarjeta.</p>
     </header>
 
-    <main>
-        <section class="uploader-card">
-            <h2>Gestionar archivos</h2>
-            <p>Sube archivos que quieras asociar a una semana. Se almacenan en tu navegador (localStorage) y se agrupan por semana.</p>
-            <input id="fileInput" type="file" multiple />
-            <button id="uploadBtn">Subir archivos</button>
-            <div id="messages" aria-live="polite"></div>
-            <hr />
-            <label for="weekSelect">Ver archivos de la semana:</label>
-            <select id="weekSelect"><option value="all">Todas</option></select>
-        </section>
-
-        <section id="filesView" class="files-view">
-            <!-- Aquí se renderizan los archivos agrupados por semana -->
-        </section>
-
-        <section id="semana1" class="semana-card">
-            <h2>Semana 1</h2>
-            <p>Organiza y accede a tus archivos desde la sección superior.</p>
-        </section>
-
-        <section id="semana2" class="semana-card">
-            <h2>Semana 2</h2>
-            <p>Organiza y accede a tus archivos desde la sección superior.</p>
-        </section>
-        <section id="semana3" class="semana-card">
-            <h2>Semana 3</h2>
-            <p>Organiza y accede a tus archivos desde la sección superior.</p>
-        </section>
-        <section id="semana4" class="semana-card">
-            <h2>Semana 4</h2>
-            <p>Organiza y accede a tus archivos desde la sección superior.</p>
-        </section>
-        <section id="semana5" class="semana-card">
-            <h2>Semana 5</h2>
-            <p>Organiza y accede a tus archivos desde la sección superior.</p>
-        </section>
-        <section id="semana6" class="semana-card">
-            <h2>Semana 6</h2>
-            <p>Organiza y accede a tus archivos desde la sección superior.</p>
-        </section>
-        <section id="semana7" class="semana-card">
-            <h2>Semana 7</h2>
-            <p>Organiza y accede a tus archivos desde la sección superior.</p>
-        </section>
-        <section id="semana8" class="semana-card">
-            <h2>Semana 8</h2>
-            <p>Organiza y accede a tus archivos desde la sección superior.</p>
-        </section>
-        <section id="semana9" class="semana-card">
-            <h2>Semana 9</h2>
-            <p>Organiza y accede a tus archivos desde la sección superior.</p>
-        </section>
-        <section id="semana10" class="semana-card">
-            <h2>Semana 10</h2>
-            <p>Organiza y accede a tus archivos desde la sección superior.</p>
-        </section>
-        <section id="semana11" class="semana-card">
-            <h2>Semana 11</h2>
-            <p>Organiza y accede a tus archivos desde la sección superior.</p>
-        </section>
-        <section id="semana12" class="semana-card">
-            <h2>Semana 12</h2>
-            <p>Organiza y accede a tus archivos desde la sección superior.</p>
-        </section>
-        <section id="semana13" class="semana-card">
-            <h2>Semana 13</h2>
-            <p>Organiza y accede a tus archivos desde la sección superior.</p>
-        </section>
-        <section id="semana14" class="semana-card">
-            <h2>Semana 14</h2>
-            <p>Organiza y accede a tus archivos desde la sección superior.</p>
-        </section>
-        <section id="semana15" class="semana-card">
-            <h2>Semana 15</h2>
-            <p>Organiza y accede a tus archivos desde la sección superior.</p>
-        </section>
-        
-        <section id="semana16" class="semana-card">
-            <h2>Semana 16</h2>
-            <p>¡Felicidades, llegaste al final! Revisa todos tus archivos aquí.</p>
-        </section>
-
+    <main id="semanas-container">
+        <!-- Las semanas se generarán dinámicamente con JavaScript -->
     </main>
 
     <footer>
