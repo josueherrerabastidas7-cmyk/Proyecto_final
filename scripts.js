@@ -57,22 +57,107 @@ function render() {
 
   filesView.innerHTML = '';
   if (selected === 'all') {
-    weekIds.forEach(weekId => {
-      filesView.appendChild(renderWeekBlock(weekId, grouped[weekId]));
-    });
+    if (weekIds.length === 0) {
+      filesView.textContent = 'No hay archivos subidos aún. ¡Sube tu primer archivo!';
+      filesView.className = 'empty-state';
+    } else {
+      weekIds.forEach(weekId => {
+        filesView.appendChild(renderWeekBlock(weekId, grouped[weekId]));
+      });
+    }
   } else {
-    if (grouped[selected]) filesView.appendChild(renderWeekBlock(selected, grouped[selected]));
-    else filesView.textContent = 'No hay archivos para esa semana.';
+    if (grouped[selected]) {
+      filesView.appendChild(renderWeekBlock(selected, grouped[selected]));
+    } else {
+      filesView.textContent = 'No hay archivos para esa semana.';
+      filesView.className = 'empty-state';
+    }
   }
 }
 
 function renderWeekBlock(weekId, items) {
   const container = document.createElement('div');
+  container.className = 'week-block';
   const h = document.createElement('h3');
   h.textContent = weekId + ` (${items.length} archivo(s))`;
   container.appendChild(h);
 
+  const filesList = document.createElement('div');
+  filesList.className = 'files-list';
+
   items.forEach(item => {
+    const fileCard = document.createElement('div');
+    fileCard.className = 'file-card';
+
+    // Crear vista previa si es imagen
+    if (item.type.startsWith('image/')) {
+      const img = document.createElement('img');
+      img.src = item.dataUrl;
+      img.className = 'file-preview';
+      img.alt = item.name;
+      fileCard.appendChild(img);
+    } else if (item.type === 'application/pdf') {
+      const pdfIcon = document.createElement('div');
+      pdfIcon.className = 'file-icon';
+      pdfIcon.innerHTML = '📄';
+      fileCard.appendChild(pdfIcon);
+    } else {
+      const fileIcon = document.createElement('div');
+      fileIcon.className = 'file-icon';
+      fileIcon.innerHTML = '📎';
+      fileCard.appendChild(fileIcon);
+    }
+
+    const meta = document.createElement('div');
+    meta.className = 'file-meta';
+    meta.innerHTML = `<strong>${escapeHtml(item.name)}</strong><small>${Math.round(item.size/1024)} KB • ${new Date(item.uploadedAt).toLocaleString()}</small>`;
+    fileCard.appendChild(meta);
+
+    const actions = document.createElement('div');
+    actions.className = 'file-actions';
+
+    const dl = document.createElement('button');
+    dl.textContent = '⬇️ Descargar';
+    dl.addEventListener('click', () => downloadFile(item));
+
+    const del = document.createElement('button');
+    del.textContent = '🗑️ Borrar';
+    del.addEventListener('click', () => deleteFile(item.id));
+
+    actions.appendChild(dl);
+    actions.appendChild(del);
+    fileCard.appendChild(actions);
+
+    filesList.appendChild(fileCard);
+  });
+
+  container.appendChild(filesList);
+  return container;
+}
+      const img = document.createElement('img');
+      img.src = item.dataUrl;
+      img.className = 'file-preview-image';
+      img.alt = item.name;
+      itemContainer.appendChild(img);
+    }
+    // Mostrar vista previa si es PDF
+    else if (item.type === 'application/pdf') {
+      const pdfContainer = document.createElement('div');
+      pdfContainer.className = 'file-preview-pdf';
+      pdfContainer.innerHTML = `<p>📄 PDF: ${escapeHtml(item.name)}</p>`;
+      itemContainer.appendChild(pdfContainer);
+    }
+    // Para otros tipos de archivo
+    else {
+      const fileType = item.type || 'archivo';
+      const icon = getFileIcon(item.type);
+      const typeContainer = document.createElement('div');
+      typeContainer.className = 'file-preview-other';
+      typeContainer.innerHTML = `<p>${icon} ${escapeHtml(item.name)}</p>`;
+      itemContainer.appendChild(typeContainer);
+    }
+
+    // Metadata y acciones
     const row = document.createElement('div');
     row.className = 'file-item';
 
@@ -95,10 +180,24 @@ function renderWeekBlock(weekId, items) {
 
     row.appendChild(meta);
     row.appendChild(actions);
-    container.appendChild(row);
+
+    itemContainer.appendChild(row);
+    container.appendChild(itemContainer);
   });
 
   return container;
+}
+
+function getFileIcon(type) {
+  if (type.startsWith('image/')) return '🖼️';
+  if (type === 'application/pdf') return '📄';
+  if (type.includes('word') || type.includes('document')) return '📝';
+  if (type.includes('sheet') || type.includes('excel')) return '📊';
+  if (type.includes('presentation') || type.includes('powerpoint')) return '📽️';
+  if (type.includes('video')) return '🎬';
+  if (type.includes('audio')) return '🎵';
+  if (type.includes('zip') || type.includes('rar') || type.includes('compress')) return '📦';
+  return '📎';
 }
 
 function escapeHtml(s){
@@ -120,7 +219,7 @@ function deleteFile(id) {
   let files = getUploadedFiles();
   files = files.filter(f => f.id !== id);
   saveUploadedFiles(files);
-  showMessage('Archivo borrado.');
+  showMessage('Archivo borrado correctamente.');
   render();
 }
 
@@ -132,7 +231,7 @@ function showMessage(msg, timeout = 3000) {
 uploadBtn.addEventListener('click', async () => {
   const list = Array.from(fileInput.files || []);
   if (list.length === 0) { showMessage('Selecciona al menos un archivo.'); return; }
-  showMessage('Subiendo...');
+  showMessage('Subiendo archivos...');
   const store = getUploadedFiles();
   for (const f of list) {
     const dataUrl = await readFileAsDataURL(f);
@@ -142,7 +241,7 @@ uploadBtn.addEventListener('click', async () => {
   }
   saveUploadedFiles(store);
   fileInput.value = '';
-  showMessage('Archivos subidos correctamente.');
+  showMessage('Archivos subidos correctamente. ✅');
   render();
 });
 
