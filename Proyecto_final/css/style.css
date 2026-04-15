@@ -1,0 +1,836 @@
+/* ===================================
+   VARIABLES Y RESET
+   =================================== */
+
+   :root {
+    --bg-base:        #0a0a0e;
+    --bg-surface:     #0f0f15;
+    --bg-card:        #13131a;
+    --bg-card-hover:  #17171f;
+    --bg-elevated:    #1c1c26;
+
+    --accent:         #6c63ff;
+    --accent-dim:     #534AB7;
+    --accent-muted:   rgba(108, 99, 255, 0.15);
+    --accent-border:  rgba(108, 99, 255, 0.25);
+
+    --teal:           #1D9E75;
+    --teal-muted:     rgba(29, 158, 117, 0.12);
+    --teal-border:    rgba(29, 158, 117, 0.25);
+
+    --text-primary:   #e8e6ff;
+    --text-secondary: #888780;
+    --text-muted:     #444441;
+    --text-accent:    #AFA9EC;
+
+    --border-subtle:  rgba(255, 255, 255, 0.05);
+    --border-soft:    rgba(255, 255, 255, 0.08);
+    --border-accent:  rgba(108, 99, 255, 0.3);
+
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 20px;
+}
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* ===================================
+   HEADER Y NAVEGACIÓN
+   =================================== */
+
+header {
+    background: var(--bg-surface);
+    border-bottom: 0.5px solid var(--border-accent);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    height: 62px;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.logo-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+    background: transparent;
+}
+
+.logo-icon img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+}
+
+.logo-text {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: 0.01em;
+}
+
+.logo-text span {
+    color: var(--accent);
+}
+
+/* Navegación */
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2px;
+    align-items: center;
+}
+
+nav a {
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: var(--radius-sm);
+    font-weight: 400;
+    transition: color 0.2s ease, background 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+nav a:hover {
+    color: var(--text-primary);
+    background: rgba(108, 99, 255, 0.1);
+}
+
+nav a.active {
+    color: var(--text-accent);
+    background: var(--accent-muted);
+}
+
+.nav-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(83, 74, 183, 0.35);
+    color: var(--text-accent);
+    font-size: 10px;
+    font-weight: 600;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+}
+
+/* Botón GitHub */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.semester-tag {
+    font-size: 11px;
+    color: var(--text-muted);
+    padding: 4px 10px;
+    border: 0.5px solid var(--border-soft);
+    border-radius: var(--radius-sm);
+    letter-spacing: 0.06em;
+    font-weight: 500;
+}
+
+.github-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 0.5px solid var(--border-soft);
+    color: var(--text-secondary);
+    padding: 6px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.github-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--border-soft);
+    color: var(--text-primary);
+}
+
+.github-btn svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* Barra de progreso */
+.header-progress {
+    height: 2px;
+    background: var(--border-subtle);
+    width: 100%;
+}
+
+.header-progress-fill {
+    height: 2px;
+    background: var(--accent);
+    width: 56.25%; /* 9/16 semanas */
+    opacity: 0.7;
+}
+
+/* ===================================
+   HERO
+   =================================== */
+
+.hero {
+    background: var(--bg-surface);
+    padding: 4rem 2rem 3.5rem;
+    border-bottom: 0.5px solid var(--border-subtle);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -80px;
+    right: -80px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(108, 99, 255, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: center;
+}
+
+.hero-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+}
+
+.hero-content h1 {
+    font-size: 2.6rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.15;
+    margin-bottom: 0.6rem;
+    letter-spacing: -0.02em;
+}
+
+.hero-content h1 span {
+    color: var(--accent);
+}
+
+.hero-content p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 520px;
+    margin-bottom: 0;
+}
+
+.hero-stats {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 0.5px solid var(--border-subtle);
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.stat-num {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-accent);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+/* Imagen hero */
+.hero-image {
+    flex: 1;
+    text-align: center;
+    max-width: 480px;
+}
+
+.hero-image img {
+    width: 100%;
+    max-width: 460px;
+    height: auto;
+    border-radius: var(--radius-xl);
+    display: block;
+    margin: 0 auto;
+}
+
+/* Pastillas de estado hero */
+.hero-status {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-end;
+}
+
+.status-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: var(--radius-md);
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    border: 0.5px solid var(--border-subtle);
+    color: var(--text-muted);
+    background: var(--bg-card);
+}
+
+.status-pill .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--text-muted);
+    flex-shrink: 0;
+}
+
+.status-pill.done {
+    color: var(--teal);
+    border-color: var(--teal-border);
+    background: var(--teal-muted);
+}
+
+.status-pill.done .dot { background: var(--teal); }
+
+.status-pill.current {
+    color: var(--text-accent);
+    border-color: var(--accent-border);
+    background: var(--accent-muted);
+}
+
+.status-pill.current .dot { background: var(--accent); }
+
+/* ===================================
+   MAIN / CONTENIDO
+   =================================== */
+
+main {
+    min-height: calc(100vh - 200px);
+}
+
+.section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+}
+
+.section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+}
+
+.section-subtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* ===================================
+   GRID DE SEMANAS
+   =================================== */
+
+.semanas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+    margin-top: 0;
+}
+
+.semana-card {
+    background: var(--bg-card);
+    border: 0.5px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.semana-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.semana-card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-accent);
+    transform: translateY(-2px);
+}
+
+.semana-card:hover::before {
+    opacity: 1;
+}
+
+.semana-card.completada {
+    border-color: var(--teal-border);
+}
+
+.semana-card.completada::before {
+    background: var(--teal);
+    opacity: 1;
+}
+
+.semana-card.en-curso {
+    border-color: var(--accent-border);
+}
+
+.semana-card.en-curso::before {
+    background: var(--accent);
+    opacity: 1;
+}
+
+.card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.card-week {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.card-badge {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.card-badge.completada {
+    background: var(--teal-muted);
+    color: var(--teal);
+    border: 0.5px solid var(--teal-border);
+}
+
+.card-badge.en-curso {
+    background: var(--accent-muted);
+    color: var(--text-accent);
+    border: 0.5px solid var(--accent-border);
+}
+
+.card-badge.pendiente {
+    background: rgba(255,255,255,0.03);
+    color: var(--text-muted);
+    border: 0.5px solid var(--border-subtle);
+}
+
+.semana-card h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.3;
+    margin: 0;
+}
+
+.semana-card.pendiente h3 {
+    color: var(--text-secondary);
+}
+
+.semana-card p {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.card-footer {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+    padding-top: 0.5rem;
+    border-top: 0.5px solid var(--border-subtle);
+}
+
+.card-tag {
+    font-size: 10px;
+    color: var(--text-muted);
+    background: rgba(255,255,255,0.04);
+    border: 0.5px solid var(--border-subtle);
+    padding: 2px 7px;
+    border-radius: 4px;
+}
+
+/* ===================================
+   UPLOAD / SUBIDA DE ARCHIVOS
+   =================================== */
+
+.upload-card {
+    background: var(--bg-card);
+    border: 1px dashed var(--accent-border);
+    border-radius: var(--radius-lg);
+    padding: 1.8rem;
+    margin-top: 1.5rem;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.upload-card:hover {
+    border-color: var(--accent);
+    background: var(--bg-card-hover);
+}
+
+.upload-card h3 {
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+}
+
+.upload-card p {
+    color: var(--text-secondary);
+    font-size: 13px;
+    margin-bottom: 1rem;
+}
+
+.upload-card label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 1rem;
+    padding: 8px 16px;
+    background: var(--accent-muted);
+    border: 0.5px solid var(--accent-border);
+    color: var(--text-accent);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.upload-card label:hover {
+    background: rgba(108, 99, 255, 0.2);
+    border-color: var(--accent);
+}
+
+.upload-card input[type="file"] {
+    display: none;
+}
+
+.upload-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 1rem;
+}
+
+.upload-list li {
+    background: var(--bg-elevated);
+    border: 0.5px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+
+/* ===================================
+   BUTTONS
+   =================================== */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--accent);
+    color: #fff;
+    padding: 0.7rem 1.4rem;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: opacity 0.2s, transform 0.15s;
+    border: none;
+    cursor: pointer;
+    letter-spacing: 0.01em;
+}
+
+.btn:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 0.5px solid var(--border-soft);
+}
+
+.btn-secondary:hover {
+    color: var(--text-primary);
+    background: rgba(255,255,255,0.05);
+    border-color: var(--border-soft);
+}
+
+/* ===================================
+   TIPOGRAFÍA GENERAL
+   =================================== */
+
+h1, h2, h3, h4 {
+    color: var(--text-primary);
+    line-height: 1.3;
+}
+
+h2 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+h3 {
+    color: var(--text-accent);
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+p {
+    margin-bottom: 1rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+code {
+    background: var(--bg-elevated);
+    border: 0.5px solid var(--border-subtle);
+    color: var(--text-accent);
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-family: 'Courier New', 'Consolas', monospace;
+    font-size: 0.875em;
+}
+
+ul, ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+li {
+    margin-bottom: 0.4rem;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+a {
+    color: var(--text-accent);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: var(--text-primary);
+}
+
+/* ===================================
+   FOOTER
+   =================================== */
+
+footer {
+    background: var(--bg-surface);
+    border-top: 0.5px solid var(--border-subtle);
+    text-align: center;
+    padding: 2rem;
+    margin-top: 4rem;
+}
+
+footer p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 12px;
+    letter-spacing: 0.03em;
+}
+
+footer a {
+    color: var(--text-secondary);
+}
+
+footer a:hover {
+    color: var(--text-accent);
+}
+
+/* ===================================
+   CONTAINER GENERAL
+   =================================== */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* ===================================
+   RESPONSIVE
+   =================================== */
+
+@media (max-width: 900px) {
+    .hero-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .hero-status {
+        flex-direction: row;
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        height: auto;
+        padding: 1rem 1.5rem;
+        gap: 0.75rem;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2px;
+    }
+
+    .header-actions {
+        display: none;
+    }
+
+    .hero {
+        padding: 2.5rem 1.5rem 2rem;
+    }
+
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero-stats {
+        gap: 1.5rem;
+    }
+
+    .semanas-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section {
+        padding: 2rem 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    .container {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-stats {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .section-header {
+        flex-direction: column;
+        gap: 0.4rem;
+    }
+}
+
