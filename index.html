@@ -1008,8 +1008,8 @@ function handleFiles(weekId, fileList){
 }
 function finishUpload(weekId, name){
   toast(`✅ "${name}" subido a la semana ${String(weekId).padStart(2,'0')}.`);
-  scheduleSave();
   render();
+  saveState(); // guardado inmediato (sin debounce) para que no se pierda si recargas rápido
 }
 
 /* ---------------- Visor de archivos (FILE VIEWER) ---------------- */
@@ -1642,6 +1642,13 @@ function renderFooter(){
   initParticles();
   render();
 })();
+window.addEventListener('beforeunload', ()=>{
+  clearTimeout(saveTimer);
+  // guardado síncrono de último momento (localStorage.setItem es síncrono)
+  if(!window.storage){
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){}
+  }
+});
 </script>
 </body>
 </html>
