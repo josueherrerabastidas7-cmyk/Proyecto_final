@@ -529,7 +529,7 @@ let state = {
     career:"Ingeniería de Sistemas",
     course:"Base de Datos II",
     university:"Universidad Peruana Los Andes",
-    teacher:"Ing. Raul Enrique Fernandez bejarano",
+    teacher:"Ing. Docente del curso",
     cycle:"2026 - II",
   },
   weekStatus:{}, // {1:'completed', ...}
@@ -590,25 +590,42 @@ function computeProgress(){
   return {percent, byUnit, totalFiles, completedWeeks:completed};
 }
 
-/* ---------------- Persistencia (window.storage) ---------------- */
+/* ---------------- Persistencia (window.storage o localStorage como respaldo) ---------------- */
+// window.storage solo existe dentro del entorno de artefactos de Claude.
+// Fuera de ahí (p. ej. publicado en GitHub Pages) usamos localStorage del navegador,
+// que guarda los datos en el dispositivo de quien lo visite.
+const STORAGE_KEY = 'db2-portfolio-state';
+async function storageSet(key, value){
+  if(window.storage) return window.storage.set(key, value, false);
+  localStorage.setItem(key, value);
+  return {key, value};
+}
+async function storageGet(key){
+  if(window.storage) return window.storage.get(key, false);
+  const v = localStorage.getItem(key);
+  return v!==null ? {key, value:v} : null;
+}
+async function storageDelete(key){
+  if(window.storage) return window.storage.delete(key, false);
+  localStorage.removeItem(key);
+  return {key, deleted:true};
+}
 let saveTimer = null;
 function scheduleSave(){
   clearTimeout(saveTimer);
   saveTimer = setTimeout(saveState, 500);
 }
 async function saveState(){
-  if(!window.storage) return;
   try{
-    await window.storage.set('db2-portfolio-state', JSON.stringify(state), false);
+    await storageSet(STORAGE_KEY, JSON.stringify(state));
   }catch(e){
     console.warn('No se pudo guardar el estado (posiblemente por tamaño de archivos adjuntos).', e);
     toast('⚠️ No se pudo guardar (el portafolio superó el espacio disponible). Elimina algún archivo pesado.');
   }
 }
 async function loadState(){
-  if(!window.storage){ return; }
   try{
-    const res = await window.storage.get('db2-portfolio-state', false);
+    const res = await storageGet(STORAGE_KEY);
     if(res && res.value){
       const saved = JSON.parse(res.value);
       state = Object.assign(state, saved);
@@ -626,7 +643,7 @@ async function resetAllData(){
     weekStatus:{}, files:{}, comments:{}
   };
   for(let i=1;i<=16;i++){ state.weekStatus[i]='pending'; state.files[i]=[]; state.comments[i]=[]; }
-  try{ if(window.storage) await window.storage.delete('db2-portfolio-state', false); }catch(e){}
+  try{ await storageDelete(STORAGE_KEY); }catch(e){}
   toast('Datos del portafolio reiniciados.');
   render();
 }
