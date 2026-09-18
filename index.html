@@ -761,8 +761,18 @@ async function initAuth(){
 }
 async function sendMagicLink(email){
   if(!CONFIGURED || !email) return;
-  const { error } = await sb.auth.signInWithOtp({ email, options:{ emailRedirectTo: window.location.href } });
-  if(error){ toast('⚠️ '+error.message); return; }
+  try{
+    const { error } = await sb.auth.signInWithOtp({ email, options:{ emailRedirectTo: window.location.href } });
+    if(error){
+      alert("DEBUG — error al enviar el enlace:\n\nmessage: " + error.message + "\nstatus: " + (error.status||'—') + "\ncode: " + (error.code||'—') + "\n\nJSON completo:\n" + JSON.stringify(error, Object.getOwnPropertyNames(error), 2));
+      toast('⚠️ '+error.message);
+      return;
+    }
+  }catch(e){
+    alert("DEBUG — excepción al llamar signInWithOtp:\n\n" + (e && e.message) + "\n\n" + JSON.stringify(e, Object.getOwnPropertyNames(e||{}), 2));
+    toast('⚠️ Error inesperado, revisa el mensaje emergente.');
+    return;
+  }
   ui.authSent = true;
   toast('📩 Revisa tu correo: te enviamos un enlace para iniciar sesión.');
   render();
